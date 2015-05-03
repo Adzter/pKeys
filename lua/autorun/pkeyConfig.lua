@@ -22,6 +22,9 @@ pKey.canGenerate = {
 	"operator"
 }
 
+--Name of the console command to redeem a key
+pKey.consoleCommand = "redeemKey"
+
 --Use DarkRP notify or not?
 pKey.darkRP = true
 

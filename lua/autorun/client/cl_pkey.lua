@@ -91,6 +91,10 @@ net.Receive( "pKeysUserMenu", function()
 	DButton:SetText("Redeem")
 	DButton:SetPos( DFrame:GetWide() - 95, 40 )
 	DButton.DoClick = function()
+		-- Make sure there's no error if someone generates a key
+		-- when nothing has been selected in the drop down.
+		if DTextEntry:GetValue() == "" then return end
+	
 		net.Start("pKeysRedeemKey")
 			local value = DTextEntry:GetValue()
 		
@@ -99,4 +103,16 @@ net.Receive( "pKeysUserMenu", function()
 		
 		DFrame:Remove()
 	end	
+end )
+
+concommand.Add( pKey.consoleCommand, function( ply, cmd, arg )
+	-- Make sure they've actually put something as the argument
+	if !arg[1] then
+		ply:ChatPrint("[pKeys] Key cannot be blank")
+		return
+	end
+
+	net.Start("pKeysRedeemKey")	
+		net.WriteString( arg[1] .. ".txt" )
+	net.SendToServer()	
 end )
