@@ -39,6 +39,10 @@ net.Receive( "pKeysAdminMenu", function()
 	DButton:SetText("Generate")
 	DButton:SetPos( DFrame:GetWide() - 195, 35 )
 	DButton.DoClick = function()		
+		-- Make sure there's no error if someone generates a key
+		-- when nothing has been selected in the drop down.
+		if not DComboBox:GetSelected() then return end
+	
 		net.Start("pKeysGenerateKey")
 			net.WriteString( DComboBox:GetSelected() )
 		net.SendToServer()
@@ -91,10 +95,6 @@ net.Receive( "pKeysUserMenu", function()
 	DButton:SetText("Redeem")
 	DButton:SetPos( DFrame:GetWide() - 95, 40 )
 	DButton.DoClick = function()
-		-- Make sure there's no error if someone generates a key
-		-- when nothing has been selected in the drop down.
-		if DTextEntry:GetValue() == "" then return end
-	
 		net.Start("pKeysRedeemKey")
 			local value = DTextEntry:GetValue()
 		
