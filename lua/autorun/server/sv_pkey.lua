@@ -30,6 +30,9 @@ hook.Add("PlayerSay", "pKeysCommand", function( ply, text, team )
 			net.Start("pKeysUserMenu")
 			net.Send( ply )
 		end
+		
+		--Prevent the command showing in chat
+		return ""
 	end
 end)
 
