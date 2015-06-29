@@ -4,6 +4,9 @@ util.AddNetworkString("pKeysGenerateKey")
 util.AddNetworkString("pKeysUserMenu")
 util.AddNetworkString("pKeysRedeemKey")
 
+--Make sure that the folder to hold keys in actually exists
+file.CreateDir("pkeys")
+
 --Helper function to update easily without repeating code
 local function SendGUI( ply )
 	local files = {}
